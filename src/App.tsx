@@ -19,14 +19,18 @@ import Assignments from "./pages/student/Assignments";
 import Timetable from "./pages/student/Timetable";
 import Notifications from "./pages/student/Notifications";
 import Profile from "./pages/student/Profile";
+import FeePayment from "./pages/student/FeePayment";
+import FeeReceipts from "./pages/student/FeeReceipts";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ManageStudents from "./pages/admin/ManageStudents";
 import ManageAttendance from "./pages/admin/ManageAttendance";
 import Announcements from "./pages/admin/Announcements";
 import Reports from "./pages/admin/Reports";
+import FeeManagement from "./pages/admin/FeeManagement";
 import FacultyDashboard from "./pages/faculty/FacultyDashboard";
 import FacultyClasses from "./pages/faculty/FacultyClasses";
 import FacultyStudents from "./pages/faculty/FacultyStudents";
+import FacultyFeeManagement from "./pages/faculty/FacultyFeeManagement";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -46,6 +50,8 @@ const App = () => (
             <Route path="timetable" element={<Timetable />} />
             <Route path="notifications" element={<Notifications />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="fee-payment" element={<FeePayment />} />
+            <Route path="fee-receipts" element={<FeeReceipts />} />
           </Route>
 
           {/* Admin Routes */}
@@ -55,6 +61,7 @@ const App = () => (
             <Route path="attendance" element={<ManageAttendance />} />
             <Route path="announcements" element={<Announcements />} />
             <Route path="reports" element={<Reports />} />
+            <Route path="fee-management" element={<FeeManagement />} />
           </Route>
 
           {/* Faculty Routes */}
@@ -62,6 +69,7 @@ const App = () => (
             <Route index element={<FacultyDashboard />} />
             <Route path="classes" element={<FacultyClasses />} />
             <Route path="students" element={<FacultyStudents />} />
+            <Route path="fee-management" element={<FacultyFeeManagement />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

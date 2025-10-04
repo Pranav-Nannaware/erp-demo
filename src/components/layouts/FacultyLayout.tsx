@@ -1,7 +1,7 @@
 import { Outlet, useNavigate, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { GraduationCap, Home, BookOpen, Users, LogOut } from "lucide-react";
+import { GraduationCap, Home, BookOpen, Users, LogOut, CreditCard } from "lucide-react";
 import { toast } from "sonner";
 
 const FacultyLayout = () => {
@@ -19,6 +19,7 @@ const FacultyLayout = () => {
     { to: "/faculty", icon: Home, label: "Dashboard" },
     { to: "/faculty/classes", icon: BookOpen, label: "My Classes" },
     { to: "/faculty/students", icon: Users, label: "Students" },
+    { to: "/faculty/fee-management", icon: CreditCard, label: "Fee Management" },
   ];
 
   const userName = localStorage.getItem("userName") || "Faculty Member";

@@ -1,12 +1,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Book, Calendar, FileText, GraduationCap, TrendingUp, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Book, Calendar, FileText, GraduationCap, TrendingUp, Users, CreditCard, Receipt } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const quickStats = [
     { title: "Attendance", value: "92%", icon: Users, color: "text-success" },
     { title: "CGPA", value: "8.7", icon: TrendingUp, color: "text-primary" },
     { title: "Courses", value: "6", icon: Book, color: "text-warning" },
-    { title: "Assignments", value: "3 Pending", icon: FileText, color: "text-destructive" },
+    { title: "Pending Fees", value: "₹52,000", icon: CreditCard, color: "text-destructive" },
   ];
 
   const upcomingClasses = [
@@ -82,6 +85,110 @@ const Dashboard = () => {
                 </div>
               </div>
             ))}
+          </CardContent>
+        </Card>
+
+        {/* Fee Status */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <CreditCard className="h-5 w-5" />
+              Fee Status
+            </CardTitle>
+            <CardDescription>Your fee payment status</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 rounded-lg bg-accent">
+                <div>
+                  <h4 className="font-semibold text-foreground">Tuition Fee - Semester 1</h4>
+                  <p className="text-sm text-muted-foreground">Due: Mar 15, 2024</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg font-bold text-destructive">₹45,000</p>
+                  <p className="text-xs text-muted-foreground">Pending</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-between p-3 rounded-lg bg-accent">
+                <div>
+                  <h4 className="font-semibold text-foreground">Library Fee</h4>
+                  <p className="text-sm text-muted-foreground">Due: Mar 20, 2024</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg font-bold text-destructive">₹2,000</p>
+                  <p className="text-xs text-muted-foreground">Pending</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-between p-3 rounded-lg bg-accent">
+                <div>
+                  <h4 className="font-semibold text-foreground">Laboratory Fee</h4>
+                  <p className="text-sm text-muted-foreground">Due: Mar 25, 2024</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-lg font-bold text-destructive">₹5,000</p>
+                  <p className="text-xs text-muted-foreground">Pending</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Button asChild className="flex-1">
+                <Link to="/student/fee-payment">
+                  <CreditCard className="h-4 w-4 mr-2" />
+                  Pay Fees
+                </Link>
+              </Button>
+              <Button variant="outline" asChild className="flex-1">
+                <Link to="/student/fee-receipts">
+                  <Receipt className="h-4 w-4 mr-2" />
+                  View Receipts
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Additional Content Grid */}
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* Assignments */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5" />
+              Recent Assignments
+            </CardTitle>
+            <CardDescription>Your pending assignments</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-3 rounded-lg bg-accent">
+                <div>
+                  <h4 className="font-semibold text-foreground">Data Structures Assignment</h4>
+                  <p className="text-sm text-muted-foreground">Due: Mar 18, 2024</p>
+                </div>
+                <Badge variant="destructive">Pending</Badge>
+              </div>
+              <div className="flex items-center justify-between p-3 rounded-lg bg-accent">
+                <div>
+                  <h4 className="font-semibold text-foreground">Database Design Project</h4>
+                  <p className="text-sm text-muted-foreground">Due: Mar 22, 2024</p>
+                </div>
+                <Badge variant="destructive">Pending</Badge>
+              </div>
+              <div className="flex items-center justify-between p-3 rounded-lg bg-accent">
+                <div>
+                  <h4 className="font-semibold text-foreground">Web Development Lab</h4>
+                  <p className="text-sm text-muted-foreground">Due: Mar 25, 2024</p>
+                </div>
+                <Badge variant="destructive">Pending</Badge>
+              </div>
+            </div>
+            <Button asChild className="w-full">
+              <Link to="/student/assignments">
+                <FileText className="h-4 w-4 mr-2" />
+                View All Assignments
+              </Link>
+            </Button>
           </CardContent>
         </Card>
 

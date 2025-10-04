@@ -1,7 +1,7 @@
 import { Outlet, useNavigate, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { GraduationCap, Home, Users, Calendar, LogOut, Megaphone, BarChart3 } from "lucide-react";
+import { GraduationCap, Home, Users, Calendar, LogOut, Megaphone, BarChart3, CreditCard } from "lucide-react";
 import { toast } from "sonner";
 
 const AdminLayout = () => {
@@ -17,6 +17,7 @@ const AdminLayout = () => {
     { to: "/admin", icon: Home, label: "Dashboard" },
     { to: "/admin/students", icon: Users, label: "Manage Students" },
     { to: "/admin/attendance", icon: Calendar, label: "Mark Attendance" },
+    { to: "/admin/fee-management", icon: CreditCard, label: "Fee Management" },
     { to: "/admin/announcements", icon: Megaphone, label: "Announcements" },
     { to: "/admin/reports", icon: BarChart3, label: "Reports" },
   ];
