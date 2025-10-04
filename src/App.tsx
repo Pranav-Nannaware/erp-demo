@@ -11,13 +11,22 @@ const queryClient = new QueryClient();
 import Auth from "./pages/Auth";
 import StudentLayout from "./components/layouts/StudentLayout";
 import AdminLayout from "./components/layouts/AdminLayout";
+import FacultyLayout from "./components/layouts/FacultyLayout";
 import Dashboard from "./pages/student/Dashboard";
 import Attendance from "./pages/student/Attendance";
 import Results from "./pages/student/Results";
+import Assignments from "./pages/student/Assignments";
+import Timetable from "./pages/student/Timetable";
+import Notifications from "./pages/student/Notifications";
 import Profile from "./pages/student/Profile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ManageStudents from "./pages/admin/ManageStudents";
 import ManageAttendance from "./pages/admin/ManageAttendance";
+import Announcements from "./pages/admin/Announcements";
+import Reports from "./pages/admin/Reports";
+import FacultyDashboard from "./pages/faculty/FacultyDashboard";
+import FacultyClasses from "./pages/faculty/FacultyClasses";
+import FacultyStudents from "./pages/faculty/FacultyStudents";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -33,6 +42,9 @@ const App = () => (
             <Route index element={<Dashboard />} />
             <Route path="attendance" element={<Attendance />} />
             <Route path="results" element={<Results />} />
+            <Route path="assignments" element={<Assignments />} />
+            <Route path="timetable" element={<Timetable />} />
+            <Route path="notifications" element={<Notifications />} />
             <Route path="profile" element={<Profile />} />
           </Route>
 
@@ -41,6 +53,15 @@ const App = () => (
             <Route index element={<AdminDashboard />} />
             <Route path="students" element={<ManageStudents />} />
             <Route path="attendance" element={<ManageAttendance />} />
+            <Route path="announcements" element={<Announcements />} />
+            <Route path="reports" element={<Reports />} />
+          </Route>
+
+          {/* Faculty Routes */}
+          <Route path="/faculty" element={<FacultyLayout />}>
+            <Route index element={<FacultyDashboard />} />
+            <Route path="classes" element={<FacultyClasses />} />
+            <Route path="students" element={<FacultyStudents />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

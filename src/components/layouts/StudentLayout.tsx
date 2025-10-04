@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Outlet, useNavigate, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { GraduationCap, Home, Users, FileText, User, LogOut } from "lucide-react";
+import { GraduationCap, Home, Users, FileText, User, LogOut, BookOpen, Calendar, Bell } from "lucide-react";
 import { toast } from "sonner";
 
 const StudentLayout = () => {
@@ -18,6 +18,9 @@ const StudentLayout = () => {
     { to: "/student", icon: Home, label: "Dashboard" },
     { to: "/student/attendance", icon: Users, label: "Attendance" },
     { to: "/student/results", icon: FileText, label: "Results" },
+    { to: "/student/assignments", icon: BookOpen, label: "Assignments" },
+    { to: "/student/timetable", icon: Calendar, label: "Timetable" },
+    { to: "/student/notifications", icon: Bell, label: "Notifications" },
     { to: "/student/profile", icon: User, label: "Profile" },
   ];
 

@@ -1,25 +1,27 @@
 import { Outlet, useNavigate, NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { GraduationCap, Home, Users, Calendar, LogOut, Megaphone, BarChart3 } from "lucide-react";
+import { GraduationCap, Home, BookOpen, Users, LogOut } from "lucide-react";
 import { toast } from "sonner";
 
-const AdminLayout = () => {
+const FacultyLayout = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("userRole");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
     toast.success("Logged out successfully");
     navigate("/");
   };
 
   const navItems = [
-    { to: "/admin", icon: Home, label: "Dashboard" },
-    { to: "/admin/students", icon: Users, label: "Manage Students" },
-    { to: "/admin/attendance", icon: Calendar, label: "Mark Attendance" },
-    { to: "/admin/announcements", icon: Megaphone, label: "Announcements" },
-    { to: "/admin/reports", icon: BarChart3, label: "Reports" },
+    { to: "/faculty", icon: Home, label: "Dashboard" },
+    { to: "/faculty/classes", icon: BookOpen, label: "My Classes" },
+    { to: "/faculty/students", icon: Users, label: "Students" },
   ];
+
+  const userName = localStorage.getItem("userName") || "Faculty Member";
 
   return (
     <div className="min-h-screen bg-background">
@@ -32,18 +34,18 @@ const AdminLayout = () => {
             </div>
             <div>
               <h1 className="text-lg font-bold text-foreground">CSMSS COE</h1>
-              <p className="text-xs text-muted-foreground">Admin Portal</p>
+              <p className="text-xs text-muted-foreground">Faculty Portal</p>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-3">
               <Avatar>
-                <AvatarFallback className="bg-destructive text-destructive-foreground">AD</AvatarFallback>
+                <AvatarFallback className="bg-warning text-warning-foreground">FC</AvatarFallback>
               </Avatar>
               <div className="hidden sm:block">
-                <p className="text-sm font-semibold text-foreground">Admin User</p>
-                <p className="text-xs text-muted-foreground">Administrator</p>
+                <p className="text-sm font-semibold text-foreground">{userName}</p>
+                <p className="text-xs text-muted-foreground">Faculty Member</p>
               </div>
             </div>
             <Button variant="outline" size="sm" onClick={handleLogout} className="gap-2">
@@ -61,7 +63,7 @@ const AdminLayout = () => {
             <NavLink
               key={item.to}
               to={item.to}
-              end={item.to === "/admin"}
+              end={item.to === "/faculty"}
               className={({ isActive }) =>
                 `flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors border-b-2 ${
                   isActive
@@ -85,4 +87,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default FacultyLayout;

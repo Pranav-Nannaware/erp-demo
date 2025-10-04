@@ -5,30 +5,52 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { GraduationCap } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { GraduationCap, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
+
+// Hardcoded credentials for demo
+const DEMO_CREDENTIALS = {
+  admin: { email: "admin@college.edu", password: "admin123", name: "Admin User" },
+  student: { email: "student@college.edu", password: "student123", name: "John Doe", id: "CS2024001" },
+  faculty: { email: "faculty@college.edu", password: "faculty123", name: "Dr. Smith", id: "FAC001" }
+};
 
 const Auth = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
     
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
     
     setTimeout(() => {
-      // Mock authentication
-      if (email.includes("admin")) {
-        localStorage.setItem("userRole", "admin");
-        toast.success("Welcome Admin!");
-        navigate("/admin");
+      // Check credentials
+      const user = Object.values(DEMO_CREDENTIALS).find(u => u.email === email && u.password === password);
+      
+      if (user) {
+        localStorage.setItem("userRole", email.includes("admin") ? "admin" : email.includes("faculty") ? "faculty" : "student");
+        localStorage.setItem("userName", user.name);
+        if (user.id) localStorage.setItem("userId", user.id);
+        
+        toast.success(`Welcome ${user.name}!`);
+        
+        if (email.includes("admin")) {
+          navigate("/admin");
+        } else if (email.includes("faculty")) {
+          navigate("/faculty");
+        } else {
+          navigate("/student");
+        }
       } else {
-        localStorage.setItem("userRole", "student");
-        toast.success("Welcome Student!");
-        navigate("/student");
+        setError("Invalid email or password. Please check the demo credentials below.");
+        toast.error("Invalid credentials");
       }
       setIsLoading(false);
     }, 1000);
@@ -39,7 +61,7 @@ const Auth = () => {
     setIsLoading(true);
     
     setTimeout(() => {
-      toast.success("Registration successful! Please login.");
+      toast.success("Registration successful! Please login with demo credentials.");
       setIsLoading(false);
     }, 1000);
   };
@@ -58,9 +80,16 @@ const Auth = () => {
         <Card className="shadow-elegant">
           <CardHeader>
             <CardTitle>Welcome</CardTitle>
-            <CardDescription>Access your student or admin portal</CardDescription>
+            <CardDescription>Access your student, faculty, or admin portal</CardDescription>
           </CardHeader>
           <CardContent>
+            {error && (
+              <Alert className="mb-4">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            
             <Tabs defaultValue="login">
               <TabsList className="grid w-full grid-cols-2 mb-6">
                 <TabsTrigger value="login">Login</TabsTrigger>
@@ -92,9 +121,16 @@ const Auth = () => {
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? "Signing in..." : "Sign In"}
                   </Button>
-                  <p className="text-xs text-muted-foreground text-center mt-4">
-                    Tip: Use "admin@college.edu" for admin access
-                  </p>
+                  
+                  {/* Demo Credentials */}
+                  <div className="mt-6 p-4 bg-muted rounded-lg">
+                    <h4 className="font-semibold text-sm mb-2">Demo Credentials:</h4>
+                    <div className="space-y-1 text-xs">
+                      <p><strong>Admin:</strong> admin@college.edu / admin123</p>
+                      <p><strong>Student:</strong> student@college.edu / student123</p>
+                      <p><strong>Faculty:</strong> faculty@college.edu / faculty123</p>
+                    </div>
+                  </div>
                 </form>
               </TabsContent>
 
